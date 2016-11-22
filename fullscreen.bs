@@ -199,16 +199,24 @@ these steps:
    element. [[!SVG]] [[!MATHML]]
 
    <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
+   <!-- cross-process; check is only needed on pending as it is recursive already -->
 
    <li><p><a>Fullscreen is supported</a>.
 
    <li><p>This algorithm is <a>allowed to request fullscreen</a>.
   </ul>
 
+ <li><p>Let <var>topLevelDoc</var> be <var>pending</var>'s <a>node document</a>'s
+ <a>top-level browsing context</a>'s <a>active document</a>.
+ <!-- cross-process -->
+
+ <li><p>Let <var>resize</var> be true if <var>error</var> is false and <var>topLevelDoc</var>'s
+ <a>fullscreen element</a> is null, and false otherwise.
+ <!-- cross-process -->
+
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>error</var> is false: Resize <var>pending</var>'s
- <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
+ <li><p>If <var>resize</var> is true, resize <var>topLevelDoc</var>'s viewport to match the
  dimensions of the screen of the output device. Optionally display a message how the end user can
  revert this.
  <!-- cross-process -->
@@ -217,11 +225,26 @@ these steps:
   <p>As part of the next <a>animation frame task</a>, run these substeps:
 
   <ol>
-   <li><p>If either <var>error</var> is true or the <a>fullscreen element ready check</a> for
-   <var>pending</var> returns false, <a>fire an event</a> named <code>fullscreenerror</code> on
+
+   <li>
+    <p>If any of the following conditions are false, then set <var>error</var> to true:
+
+    <ul>
+     <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
+     <!-- cross-process; check is only needed on pending as it is recursive already -->
+
+     <li>
+      <p><var>pending</var>'s <a>node document</a>'s <a>top-level browsing context</a>'s
+      <a>active document</a> is <var>topLevelDoc</var>.
+      <!-- cross-process -->
+
+      <p class=note><var>pending</var> may have moved to another <a>top-level browsing context</a>
+      since the request.
+    </ul>
+
+   <li><p>If <var>error</var> is true, <a>fire an event</a> named <code>fullscreenerror</code> on
    <var>pending</var>'s <a>node document</a>, reject <var>promise</var> with a
    <code>TypeError</code> exception, and terminate these steps.
-   <!-- cross-process; check is only needed on pending as it is recursive already -->
 
    <li><p>Let <var>fullscreenElements</var> be an ordered set initially consisting of
    <var>pending</var>.
