@@ -209,15 +209,16 @@ these steps:
  <li><p>Let <var>pendingDoc</var> be <var>pending</var>'s <a>node document</a>.
 
  <li><p>Let <var>topLevelDoc</var> be <var>pendingDoc</var>'s <a>top-level browsing context</a>'s
- <a>active document</a>. <!-- cross-process -->
+ <a>active document</a>.
+ <!-- cross-process -->
 
- <li><p>Let <var>resize</var> be true if <var>error</var> is false and <var>topLevelDoc</var>'s
+ <li><p>Let <var>resize</var> be true, if <var>error</var> is false and <var>topLevelDoc</var>'s
  <a>fullscreen element</a> is null, and false otherwise.
  <!-- cross-process -->
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>resize</var> is true, resize <var>topLevelDoc</var>'s viewport to match the
+ <li><p>If <var>resize</var> is true, then resize <var>topLevelDoc</var>'s viewport to match the
  dimensions of the screen. Optionally display a message how the end user can revert this.
  <!-- cross-process -->
 

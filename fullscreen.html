@@ -237,11 +237,11 @@ these steps: </p>
     <li>
      <p>Let <var>topLevelDoc</var> be <var>pendingDoc</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#active-document">active document</a>. </p>
     <li>
-     <p>Let <var>resize</var> be true if <var>error</var> is false and <var>topLevelDoc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, and false otherwise. </p>
+     <p>Let <var>resize</var> be true, if <var>error</var> is false and <var>topLevelDoc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, and false otherwise. </p>
     <li>
      <p>Return <var>promise</var>, and run the remaining steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>. </p>
     <li>
-     <p>If <var>resize</var> is true, resize <var>topLevelDoc</var>’s viewport to match the
+     <p>If <var>resize</var> is true, then resize <var>topLevelDoc</var>’s viewport to match the
  dimensions of the screen. Optionally display a message how the end user can revert this. </p>
     <li>
      <p>As part of the next <a data-link-type="dfn" href="#animation-frame-task">animation frame task</a>, run these substeps: </p>
