@@ -130,16 +130,7 @@ stated otherwise it is unset. </p>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="unfullscreen-an-element">unfullscreen an <var>element</var><a class="self-link" href="#unfullscreen-an-element"></a></dfn>, unset <var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> and <a data-link-type="dfn" href="#iframe-fullscreen-flag">iframe fullscreen flag</a> (if any), and <a data-link-type="dfn" href="#top-layer-remove">remove</a> it from its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="unfullscreen-a-document">unfullscreen a <var>document</var><a class="self-link" href="#unfullscreen-a-document"></a></dfn>, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen</a> all <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a>, within <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>, whose <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is set. </p>
    <hr>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fully-exit-fullscreen">fully exit fullscreen<a class="self-link" href="#fully-exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>document</var>, run these steps: </p>
-   <ol>
-    <li>
-     <p>If <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, terminate these steps. </p>
-    <li>
-     <p><a data-link-type="dfn" href="#unfullscreen-an-element">Unfullscreen elements</a> whose <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is
- set, within <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>, except for <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
-    <li>
-     <p><a data-link-type="dfn" href="#exit-fullscreen">Exit fullscreen</a> <var>document</var>. </p>
-   </ol>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fully-exit-fullscreen">fully exit fullscreen<a class="self-link" href="#fully-exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>document</var>, <a data-link-type="dfn" href="#exit-fullscreen">exit fullscreen</a> <var>document</var> with the <var>fully flag</var> set. </p>
    <p>Whenever the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-remove-ext">removing steps</a> run with an <var>oldNode</var>, run these steps: </p>
    <ol>
     <li>
@@ -173,7 +164,7 @@ security risk, or platform limitation. </p>
   [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="boolean" href="#dom-document-fullscreenenabled">fullscreenEnabled</a>;
   [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="boolean" href="#dom-document-fullscreen">fullscreen</a>; // historical
 
-  <span class="kt">Promise</span>&lt;<span class="kt">void</span>> <a class="nv idl-code" data-link-type="method" href="#dom-document-exitfullscreen">exitFullscreen</a>();
+  <span class="kt">Promise</span>&lt;<span class="kt">void</span>> <a class="nv idl-code" data-link-type="method" href="#dom-document-exitfullscreen">exitFullscreen</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-exitfullscreenoptions">ExitFullscreenOptions</a> <dfn class="nv idl-code" data-dfn-for="Document/exitFullscreen(options), Document/exitFullscreen()" data-dfn-type="argument" data-export="" id="dom-document-exitfullscreen-options-options">options<a class="self-link" href="#dom-document-exitfullscreen-options-options"></a></dfn>);
 
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#handler-document-onfullscreenchange">onfullscreenchange</a>;
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#handler-document-onfullscreenerror">onfullscreenerror</a>;
@@ -181,6 +172,10 @@ security risk, or platform limitation. </p>
 
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://dom.spec.whatwg.org/#documentorshadowroot">DocumentOrShadowRoot</a> {
   [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#element">Element</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Element?" href="#dom-document-fullscreenelement">fullscreenElement</a>;
+};
+
+<span class="kt">dictionary</span> <dfn class="nv idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-exitfullscreenoptions">ExitFullscreenOptions<a class="self-link" href="#dictdef-exitfullscreenoptions"></a></dfn> {
+  <span class="kt">boolean</span> <dfn class="nv idl-code" data-default="false" data-dfn-for="ExitFullscreenOptions" data-dfn-type="dict-member" data-export="" data-type="boolean " id="dom-exitfullscreenoptions-fully">fully<a class="self-link" href="#dom-exitfullscreenoptions-fully"></a></dfn> = <span class="kt">false</span>;
 };
 </pre>
    <dl class="domintro">
@@ -294,11 +289,12 @@ false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-obje
     <li>
      <p>Return null. </p>
    </ol>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="collect-documents-to-unfullscreen">collect documents to unfullscreen<a class="self-link" href="#collect-documents-to-unfullscreen"></a></dfn> given <var>doc</var>, run these steps: </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="collect-documents-to-unfullscreen">collect documents to unfullscreen<a class="self-link" href="#collect-documents-to-unfullscreen"></a></dfn> given <var>doc</var> and a <var>fully flag</var>,
+run these steps: </p>
    <ol>
     <li>
-     <p>If <var>doc</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a> consists of more than a single <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> that has
- its <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set, return the empty set. </p>
+     <p>If the <var>fully flag</var> is unset and <var>doc</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a> consists of more
+ than a single <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> that has its <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set, return the empty set. </p>
     <li>
      <p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>. </p>
     <li>
@@ -307,7 +303,7 @@ false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-obje
     <li>
      <p>Return <var>docs</var>. </p>
    </ol>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="exit-fullscreen">exit fullscreen<a class="self-link" href="#exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>doc</var>, run these steps: </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="exit-fullscreen">exit fullscreen<a class="self-link" href="#exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>doc</var> with an optional <var>fully flag</var>, run these steps: </p>
    <ol>
     <li>
      <p>Let <var>promise</var> be a new promise. </p>
@@ -316,7 +312,7 @@ false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-obje
     <li>
      <p>Let <var>resize</var> be false. </p>
     <li>
-     <p>Let <var>docs</var> be the result of <a data-link-type="dfn" href="#collect-documents-to-unfullscreen">collecting documents to unfullscreen</a> given <var>doc</var>. </p>
+     <p>Let <var>docs</var> be the result of <a data-link-type="dfn" href="#collect-documents-to-unfullscreen">collecting documents to unfullscreen</a> given <var>doc</var> and the <var>fully flag</var>. </p>
     <li>
      <p>Let <var>topLevelDoc</var> be <var>doc</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#active-document">active document</a>. </p>
     <li>
@@ -330,7 +326,7 @@ false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-obje
      <p>As part of the next <a data-link-type="dfn" href="#animation-frame-task">animation frame task</a>, run these substeps: </p>
      <ol>
       <li>
-       <p>Let <var>exitDocs</var> be the result of <a data-link-type="dfn" href="#collect-documents-to-unfullscreen">collecting documents to unfullscreen</a> given <var>doc</var>. </p>
+       <p>Let <var>exitDocs</var> be the result of <a data-link-type="dfn" href="#collect-documents-to-unfullscreen">collecting documents to unfullscreen</a> given <var>doc</var> and the <var>fully flag</var>. </p>
       <li>
        <p>If <var>resize</var> is true and <var>topLevelDoc</var> is not in <var>exitDocs</var>, <a data-link-type="dfn" href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>topLevelDoc</var>, reject <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps. </p>
       <li>
@@ -343,7 +339,7 @@ false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-obje
       <li>
        <p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order, <a data-link-type="dfn" href="#unfullscreen-a-document">unfullscreen <var>descendantDoc</var></a>. </p>
       <li>
-       <p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen</a> <var>exitDoc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+       <p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order: If <var>exitDoc</var> is <var>doc</var> and the <var>fully flag</var> is set, then <a data-link-type="dfn" href="#unfullscreen-a-document">unfullscreen <var>doc</var></a>. Otherwise, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen</a> <var>exitDoc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
       <li>
        <p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenchange</code> on <var>descendantDoc</var>. </p>
       <li>
@@ -353,8 +349,9 @@ false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-obje
      </ol>
      <p class="note" role="note">This results in events being fired from the innermost to the outermost document. </p>
    </ol>
-   <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="method" data-export="" id="dom-document-exitfullscreen"><code>exitFullscreen()</code><a class="self-link" href="#dom-document-exitfullscreen"></a></dfn> method, when invoked, must
-return the result of running <a data-link-type="dfn" href="#exit-fullscreen">exit fullscreen</a> on the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>. </p>
+   <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="method" data-export="" data-lt="exitFullscreen(options)|exitFullscreen()" id="dom-document-exitfullscreen"><code>exitFullscreen(<var>options</var>)</code><a class="self-link" href="#dom-document-exitfullscreen"></a></dfn> method, when
+invoked, must return the result of running <a data-link-type="dfn" href="#exit-fullscreen">exit fullscreen</a> on the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> with
+the <var>fully flag</var> set if <var>options</var>’s <var>fully</var> member is true. </p>
    <hr>
    <p>The following are the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a> (and their corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event types</a>) that must be supported on <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">documents</a> as attributes: </p>
    <table>
