@@ -305,7 +305,7 @@ run these steps:
  <li><p>Return <var>docs</var>.
 </ol>
 
-<p>To <dfn>exit fullscreen</dfn> a <a for=/>document</a> <var>doc</var> with an optional
+<p>To <dfn>exit fullscreen</dfn> a <a for=/>document</a> <var>doc</var> with a
 <var>fully flag</var>, run these steps:
 
 <ol>
@@ -362,10 +362,16 @@ run these steps:
    <a lt="unfullscreen a document">unfullscreen <var>descendantDoc</var></a>.
    <!-- cross-process -->
 
-   <li><p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order: If <var>exitDoc</var> is
-   <var>doc</var> and the <var>fully flag</var> is set, then
-   <a lt="unfullscreen a document">unfullscreen <var>doc</var></a>. Otherwise,
-   <a lt="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s <a>fullscreen element</a>.
+   <li>
+    <p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order:
+
+    <ol>
+     <li><p>If <var>exitDoc</var> is <var>doc</var> and the <var>fully flag</var> is set, then
+     <a lt="unfullscreen a document">unfullscreen <var>doc</var></a>.
+
+     <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s
+     <a>fullscreen element</a>.
+    </ol>
 
    <li><p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order,
    <a>fire an event</a> named <code>fullscreenchange</code> on <var>descendantDoc</var>.

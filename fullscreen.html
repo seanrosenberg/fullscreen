@@ -303,7 +303,7 @@ run these steps: </p>
     <li>
      <p>Return <var>docs</var>. </p>
    </ol>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="exit-fullscreen">exit fullscreen<a class="self-link" href="#exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>doc</var> with an optional <var>fully flag</var>, run these steps: </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="exit-fullscreen">exit fullscreen<a class="self-link" href="#exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>doc</var> with a <var>fully flag</var>, run these steps: </p>
    <ol>
     <li>
      <p>Let <var>promise</var> be a new promise. </p>
@@ -339,7 +339,13 @@ run these steps: </p>
       <li>
        <p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order, <a data-link-type="dfn" href="#unfullscreen-a-document">unfullscreen <var>descendantDoc</var></a>. </p>
       <li>
-       <p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order: If <var>exitDoc</var> is <var>doc</var> and the <var>fully flag</var> is set, then <a data-link-type="dfn" href="#unfullscreen-a-document">unfullscreen <var>doc</var></a>. Otherwise, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen</a> <var>exitDoc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+       <p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order: </p>
+       <ol>
+        <li>
+         <p>If <var>exitDoc</var> is <var>doc</var> and the <var>fully flag</var> is set, then <a data-link-type="dfn" href="#unfullscreen-a-document">unfullscreen <var>doc</var></a>. </p>
+        <li>
+         <p>Otherwise, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen</a> <var>exitDoc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+       </ol>
       <li>
        <p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenchange</code> on <var>descendantDoc</var>. </p>
       <li>
